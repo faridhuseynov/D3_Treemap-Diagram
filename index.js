@@ -32,7 +32,6 @@ fetch(videoGameSales)
       .join("g")
       .attr("transform", d => `translate(${d.x0},${d.y0})`);
 
-
   leaf.append("rect")
       .attr("fill", d => {
          while (d.depth > 1) 
@@ -41,7 +40,8 @@ fetch(videoGameSales)
          })
       .attr("fill-opacity", 0.6)
       .attr("width", d => d.x1 - d.x0)
-      .attr("height", d => d.y1 - d.y0);
+      .attr("height", d => d.y1 - d.y0)
+      .attr("class","tile");
 
   leaf.append("text")
     .selectAll("tspan")
