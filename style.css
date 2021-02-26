@@ -22,3 +22,7 @@ nav a{
 h1{
     font-size: 45px;
 }
+
+svg {
+    font:11px sans-serif;
+}

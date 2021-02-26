@@ -5,8 +5,8 @@ const movieSalesUrl =
 const videoGameSales =
   "https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json";
 
-const height = 1000;
-const width = 1200;
+const height = 700;
+const width = 1300;
 
 var movieArr = [];
 var gameArr = [];
@@ -14,7 +14,8 @@ var gameArr = [];
 d3.select("body").append("title").text("Treemap Diagram").attr("id", "title");
 format = d3.format(",d");
 color = d3.scaleOrdinal(d3.schemeCategory10);
-// .round(true);
+
+const ratio = 1;
 
 var svg = d3.select("#main").append("svg")
 .attr("id", "canvas")
@@ -33,7 +34,11 @@ fetch(videoGameSales)
 
 
   leaf.append("rect")
-      .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
+      .attr("fill", d => {
+         while (d.depth > 1) 
+          d = d.parent;
+         return color(d.data.name);
+         })
       .attr("fill-opacity", 0.6)
       .attr("width", d => d.x1 - d.x0)
       .attr("height", d => d.y1 - d.y0);
@@ -54,8 +59,8 @@ function treemap(data) {
 
   console.log(data);
   return (d3.treemap()
-    .tile(d3.treemapBinary)
-    .size([width+300, height])
+    .tile(d3.treemapSquarify.ratio(1))
+    .size([width/ratio, height])
     .padding(1)
     .round(true)(d3.hierarchy(data)
       .sum(d => d.value)
