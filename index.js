@@ -31,7 +31,8 @@ fetch(videoGameSales)
   color = d3.scaleOrdinal(d3.schemeCategory10);
   
   color.domain(legendBlockValues);
-  
+  console.log(color.domain());
+  console.log(legendBlockValues);
     const root = treemap(data);
     const leaf = svg.selectAll("g")
       .data(root.leaves())
@@ -81,12 +82,14 @@ fetch(videoGameSales)
 
 
 const legendBlockCanvas = d3.select("#main").append("svg")
-                            .attr("id","legend-canvas");
+                            .attr("id","legend-canvas")
+                            .attr("width",width);
+
 
 
 const legendBlock = legendBlockCanvas.append("g")
                     .attr("id","legend")
-                    .attr("transform","translate(0,0)");
+                    .attr("transform","translate("+(width/3)+",0)");
                     // .attr("transform",
                     // "translate("+(width/3)+","
                     // +(height-150)+")");
