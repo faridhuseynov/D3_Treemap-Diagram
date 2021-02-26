@@ -22,6 +22,8 @@ var svg = d3.select("#main").append("svg")
 .attr("height",height)
 .attr("width",width);
 
+// const div = d3.select("#main").append("div").attr("id","tooltip");
+
 fetch(videoGameSales)
   .then((response) => response.json())
   .then((data) => {
@@ -41,7 +43,10 @@ fetch(videoGameSales)
       .attr("fill-opacity", 0.6)
       .attr("width", d => d.x1 - d.x0)
       .attr("height", d => d.y1 - d.y0)
-      .attr("class","tile");
+      .attr("class","tile")
+      .attr("data-name",d=>d.data.name)
+      .attr("data-category",d=>d.data.category)
+      .attr("data-value",d=>d.data.value);
 
   leaf.append("text")
     .selectAll("tspan")
