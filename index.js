@@ -31,8 +31,6 @@ fetch(videoGameSales)
   color = d3.scaleOrdinal(d3.schemeCategory10);
   
   color.domain(legendBlockValues);
-  console.log(color.domain());
-  console.log(legendBlockValues);
     const root = treemap(data);
     const leaf = svg.selectAll("g")
       .data(root.leaves())
@@ -117,8 +115,6 @@ const legendBlock = legendBlockCanvas.append("g")
   });
 
 function treemap(data) {
-
-  console.log(data);
   return (d3.treemap()
     .tile(d3.treemapSquarify.ratio(1))
     .size([width/ratio, height])
