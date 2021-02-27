@@ -52,7 +52,7 @@ fetch(videoGameSales)
       .attr("data-value",d=>d.data.value)
       .on("mouseover",(event,d)=>{
         div.transition()
-            .duration(500)
+            .duration(10)
             .style("opacity",1)
             .attr("data-value",()=>{
               var check = (Math.round(parseFloat(d.value)*100)/100).toFixed(2);
@@ -66,7 +66,7 @@ fetch(videoGameSales)
       })
       .on("mouseout",()=>{
         div.transition()
-            .duration(500)
+            .duration(10)
             .style("opacity",0);
       });
 
