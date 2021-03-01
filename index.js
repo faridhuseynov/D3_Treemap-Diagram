@@ -25,6 +25,7 @@ function  createTreeMap(data){
   .attr("id", "canvasSvg")
   .attr("height",height)
   .attr("width",width);
+  
   const legendBlockValues = data.children.map(child=>child.name);
   color = d3.scaleOrdinal(d3.schemeCategory10);
   
