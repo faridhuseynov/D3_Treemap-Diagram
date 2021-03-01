@@ -8,8 +8,7 @@ const videoGameSales =
 const height = 800;
 const width = 1200;
 
-var movieArr = [];
-var gameArr = [];
+
 
 d3.select("body").append("title").text("Treemap Diagram").attr("id", "title");
 format = d3.format(",d");
@@ -23,10 +22,7 @@ var svg = d3.select("#main").append("svg")
 
 const div = d3.select("#main").append("div").attr("id","tooltip");
 
-fetch(videoGameSales)
-.then((response) => response.json())
-.then((data) => {
-  
+function  createTreeMap(data){
   const legendBlockValues = data.children.map(child=>child.name);
   color = d3.scaleOrdinal(d3.schemeCategory10);
   
@@ -112,7 +108,7 @@ const legendBlock = legendBlockCanvas.append("g")
             .attr("x",(d,i)=>(Math.floor(i/4)*100+35))
             .attr("y",(d,i)=>((i%4)*35+15))
             .style("font-size","14px");
-  });
+}
 
 function treemap(data) {
   return (d3.treemap()
@@ -123,3 +119,37 @@ function treemap(data) {
       .sum(d => d.value)
       .sort((a, b) => b.value - a.value)));
 } 
+
+$(".navLink").on("click",(event)=>{
+  event.preventDefault();
+  var choice = (event.target.id);
+  clearDisplay();
+  if(choice=="movie"){
+    fetch(movieSalesUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      createTreeMap(data);
+    });
+  }else if(choice=="video"){
+    fetch(videoGameSales)
+    .then((response) => response.json())
+    .then((data) => {
+      createTreeMap(data);
+    });
+  }else{
+    fetch(kickStarterUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      createTreeMap(data);
+    });
+  }
+})
+  fetch(videoGameSales)
+  .then((response) => response.json())
+  .then((data) => {
+    createTreeMap(data);
+  });
+
+  function clearDisplay(){
+    d3.select("#canvas").remove();
+  }
