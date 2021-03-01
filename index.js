@@ -50,7 +50,6 @@ function  createTreeMap(data){
       .attr("data-value",d=>d.data.value)
       .on("mouseover",(event,d)=>{
         div.transition()
-            .duration(10)
             .style("opacity",1)
             .attr("data-value",()=>{
               var check = (Math.round(parseFloat(d.value)*100)/100).toFixed(2);
@@ -64,7 +63,6 @@ function  createTreeMap(data){
       })
       .on("mouseout",()=>{
         div.transition()
-            .duration(10)
             .style("opacity",0);
       });
 
@@ -85,7 +83,7 @@ const legendBlockCanvas = d3.select("#canvas").append("svg")
 
 const legendBlock = legendBlockCanvas.append("g")
                     .attr("id","legend")
-                    .attr("transform","translate("+(width/3)+",0)");
+                    .attr("transform","translate("+(width/4)+",0)");
                     // .attr("transform",
                     // "translate("+(width/3)+","
                     // +(height-150)+")");
@@ -98,7 +96,7 @@ const legendBlock = legendBlockCanvas.append("g")
             .append("rect")            
             .attr("height",22)
             .attr("width",22)
-            .attr("x",(d,i)=>(Math.floor(i/4)*100))
+            .attr("x",(d,i)=>(Math.floor(i/4)*160))
             .attr("y",(d,i)=>((i%4)*35))
             .style("fill",d=>color(d))
             .attr("class","legend-item");
@@ -107,7 +105,7 @@ const legendBlock = legendBlockCanvas.append("g")
             .enter()
             .append("text")
             .text(d=>d)
-            .attr("x",(d,i)=>(Math.floor(i/4)*100+35))
+            .attr("x",(d,i)=>(Math.floor(i/4)*160+35))
             .attr("y",(d,i)=>((i%4)*35+15))
             .style("font-size","14px");
 }
@@ -127,18 +125,24 @@ $(".navLink").on("click",(event)=>{
   var choice = (event.target.id);
   clearDisplay();
   if(choice=="movie"){
+    $("#description-h").text("Movie Sales");
+    $("#description-p").text("Top 100 Most Sold Movies Grouped by Genre");
     fetch(movieSalesUrl)
     .then((response) => response.json())
     .then((data) => {
       createTreeMap(data);
     });
   }else if(choice=="video"){
+    $("#description-h").text("Video Game Sales");
+    $("#description-p").text("Top 100 Most Sold Video Games Grouped by Platform");
     fetch(videoGameSales)
     .then((response) => response.json())
     .then((data) => {
       createTreeMap(data);
     });
   }else{
+    $("#description-h").text("Kickstarter Sales");
+    $("#description-p").text("Top 100 Most Sold Kickstarter Projects by Categories");
     fetch(kickStarterUrl)
     .then((response) => response.json())
     .then((data) => {
