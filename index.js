@@ -15,14 +15,16 @@ format = d3.format(",d");
 
 const ratio = 1;
 
-var svg = d3.select("#main").append("svg")
-.attr("id", "canvas")
-.attr("height",height)
-.attr("width",width);
 
 const div = d3.select("#main").append("div").attr("id","tooltip");
 
+
 function  createTreeMap(data){
+  console.log(data);
+  var svg = d3.select("#canvas").append("svg")
+  .attr("id", "canvasSvg")
+  .attr("height",height)
+  .attr("width",width);
   const legendBlockValues = data.children.map(child=>child.name);
   color = d3.scaleOrdinal(d3.schemeCategory10);
   
@@ -75,7 +77,7 @@ function  createTreeMap(data){
       .text(d => d);
 
 
-const legendBlockCanvas = d3.select("#main").append("svg")
+const legendBlockCanvas = d3.select("#canvas").append("svg")
                             .attr("id","legend-canvas")
                             .attr("width",width);
 
@@ -151,5 +153,5 @@ $(".navLink").on("click",(event)=>{
   });
 
   function clearDisplay(){
-    d3.select("#canvas").remove();
+    d3.select("#canvas").selectAll("*").remove();
   }
