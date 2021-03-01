@@ -6,7 +6,7 @@ const videoGameSales =
 "https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json";
 
 const height = 800;
-const width = 1300;
+const width = 1200;
 
 var movieArr = [];
 var gameArr = [];
